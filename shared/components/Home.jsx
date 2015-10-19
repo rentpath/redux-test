@@ -12,7 +12,7 @@ export default class Home extends React.Component {
     const { todos, dispatch } = this.props;
 
     return (
-      < div id="todo-list">
+      <div id="todo-list">
         <TodosView todos={todos}
           {...bindActionCreators(TodoActions, dispatch)} />
 
