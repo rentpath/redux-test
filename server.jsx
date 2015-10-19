@@ -15,7 +15,7 @@ app.use((req, res) => {
   const store = createStore(reducer);
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
-    if (err) { 
+    if (err) {
       console.error(err);
       return res.status(500).end('Internal server error');
     }
@@ -44,7 +44,7 @@ app.use((req, res) => {
         <div id="react-view">${componentHTML}</div>
         <script type="application/javascript" src="/bundle.js"></script>
       </body>
-  </html>    
+  </html>
 `
     res.end(HTML);
   });
