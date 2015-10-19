@@ -9,7 +9,7 @@ export default class TodosView extends React.Component {
 
   handleEdit = (e) => {
     const id = Number(e.target.dataset.id);
-    const val = this.props.todos.get(id).text
+    const val = this.props.todos[id];
 
     let newVal = window.prompt('', val);
     this.props.editTodo(id, newVal);

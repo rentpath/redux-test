@@ -5,7 +5,6 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import routes      from 'routes';
 import { Provider } from 'react-redux';
 import * as reducers from 'reducers';
-import { fromJS } from 'immutable';
 import { compose, createStore, combineReducers } from 'redux';
 import { devTools, persistState } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
@@ -13,12 +12,6 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 const history = createBrowserHistory();
 
 let initialState = window.__INITIAL_STATE__;
-
-Object
-  .keys(initialState)
-  .forEach(key => {
-    initialState[key] = fromJS(initialState[key]);
-  });
 
 const reducer = combineReducers(reducers);
 

@@ -15,7 +15,6 @@
     "axios": "^0.5.4",
     "express": "^4.13.3",
     "history": "^1.9.1",
-    "immutable": "^3.7.5",
     "object-assign": "^4.0.1",
     "react": "^0.14.0",
     "react-dom": "0.14.0",
