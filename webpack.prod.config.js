@@ -7,8 +7,6 @@ var webpackConfig = {
     extensions: ['', '.js', '.jsx']
   },
   entry:  [
-    'webpack-dev-server/client?http://127.0.0.1:8080/',
-    'webpack/hot/only-dev-server',
     './client'
   ],
   output: {
@@ -21,7 +19,7 @@ var webpackConfig = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel']
+        loaders: ['babel']
       }
     ]
   },
@@ -34,6 +32,7 @@ var webpackConfig = {
         NODE_ENV: JSON.stringify('production')
       }
     }),
+    new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
