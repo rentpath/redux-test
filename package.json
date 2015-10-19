@@ -17,7 +17,8 @@
     "history": "^1.9.1",
     "immutable": "^3.7.5",
     "object-assign": "^4.0.1",
-    "react": "^0.13.3",
+    "react": "^0.14.0",
+    "react-dom": "0.14.0",
     "react-redux": "^2.1.2",
     "react-router": "1.0.0-rc3",
     "redux": "^3.0.0"

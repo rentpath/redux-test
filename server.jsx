@@ -1,5 +1,6 @@
 import express                   from 'express';
 import React                     from 'react';
+import ReactDOMServer            from 'react-dom/server';
 import { RoutingContext, match } from 'react-router';
 import createLocation            from 'history/lib/createLocation';
 import routes                    from 'routes';
@@ -23,13 +24,11 @@ app.use((req, res) => {
 
     const InitialComponent = (
       <Provider store={store}>
-        {() =>
-          <RoutingContext {...renderProps} />
-        }
+        <RoutingContext {...renderProps} />
       </Provider>
     );
     const initialState = store.getState();
-    const componentHTML = React.renderToString(InitialComponent);
+    const componentHTML = ReactDOMServer.renderToString(InitialComponent);
     const HTML = `
     <!DOCTYPE html>
     <html>

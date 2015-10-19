@@ -1,4 +1,5 @@
 import React       from 'react';
+import ReactDOM    from 'react-dom';
 import { Router }  from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import routes      from 'routes';
@@ -20,7 +21,7 @@ Object
   });
 
 const reducer = combineReducers(reducers);
-//const store = createStore(reducer, initialState);
+
 const finalCreateStore = compose(
   devTools(),
   persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
@@ -28,12 +29,10 @@ const finalCreateStore = compose(
 
 const store = finalCreateStore(reducer);
 
-React.render(
+ReactDOM.render(
   <div>
     <Provider store={store}>
-      {() =>
-        <Router children={routes} history={history} />
-        }
+      <Router children={routes} history={history} />
     </Provider>
     <DebugPanel top right bottom>
       <DevTools store={store} monitor={LogMonitor} />
