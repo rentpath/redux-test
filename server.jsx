@@ -4,16 +4,25 @@ import ReactDOMServer            from 'react-dom/server';
 import { RoutingContext, match } from 'react-router';
 import createLocation            from 'history/lib/createLocation';
 import routes                    from 'routes';
-import { createStore, combineReducers } from 'redux';
+import { compose, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import * as reducers from 'reducers';
+
+import { devTools } from 'redux-devtools';
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 const app = express();
 
 app.use((req, res) => {
   const location = createLocation(req.url);
   const reducer = combineReducers(reducers);
-  const store = createStore(reducer);
+  //const store = createStore(reducer);
+
+  const finalCreateStore = compose(
+    devTools()
+  )(createStore);
+
+  const store = finalCreateStore(reducer);
 
   match({ routes, location }, (err, redirectLocation, renderProps) => {
     if (err) {
@@ -23,9 +32,14 @@ app.use((req, res) => {
     if (!renderProps) return res.status(404).end('Not found.');
 
     const InitialComponent = (
-      <Provider store={store}>
-        <RoutingContext {...renderProps} />
-      </Provider>
+      <div>
+        <Provider store={store}>
+          <RoutingContext {...renderProps} />
+        </Provider>
+        <DebugPanel top right bottom>
+          <DevTools store={store} monitor={LogMonitor} />
+        </DebugPanel>
+      </div>
     );
     const initialState = store.getState();
     const componentHTML = ReactDOMServer.renderToString(InitialComponent);
