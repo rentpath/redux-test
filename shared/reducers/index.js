@@ -1,2 +1,8 @@
-export { default as todos } from './TodoReducer';
-export { default as books } from './BookReducer';
+import { combineReducers } from 'redux';
+import todos from './TodoReducer';
+import books from './BookReducer';
+
+export default combineReducers({
+  todos,
+  books
+});

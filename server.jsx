@@ -4,9 +4,9 @@ import ReactDOMServer            from 'react-dom/server';
 import { RoutingContext, match } from 'react-router';
 import createLocation            from 'history/lib/createLocation';
 import routes                    from 'routes';
-import { compose, createStore, combineReducers } from 'redux';
+import { compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import * as reducers from 'reducers';
+import reducer from 'reducers';
 
 import { devTools } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
@@ -15,8 +15,6 @@ const app = express();
 
 app.use((req, res) => {
   const location = createLocation(req.url);
-  const reducer = combineReducers(reducers);
-  //const store = createStore(reducer);
 
   const finalCreateStore = compose(
     devTools()

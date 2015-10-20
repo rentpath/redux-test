@@ -4,17 +4,15 @@ import { Router }  from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import routes      from 'routes';
 import { Provider } from 'react-redux';
-import * as reducers from 'reducers';
+import reducer from 'reducers';
 import thunk from 'redux-thunk';
-import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
+import { compose, createStore, applyMiddleware } from 'redux';
 import { devTools, persistState } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
 const history = createBrowserHistory();
 
 let initialState = window.__INITIAL_STATE__;
-
-const reducer = combineReducers(reducers);
 
 const finalCreateStore = compose(
   applyMiddleware(thunk),
